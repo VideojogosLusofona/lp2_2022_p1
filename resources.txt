@@ -1,0 +1,6 @@
+plants
+animals
+metals
+fossilfuel
+luxury
+pollution
