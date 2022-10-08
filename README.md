@@ -147,7 +147,7 @@ a sessão de avaliação de _live coding_ agendada para dia 13 de dezembro. Por
 esta razão será muito difícil fazerem o Projeto 2 (_live coding_) caso não
 tenham completado com sucesso este projeto.
 
-Exemplos do tipo de perguntas que poderão surgir no Projeto 2 está disponível
+Exemplos do tipo de perguntas que poderão surgir no Projeto 2 estão disponíveis
 [aqui](livecoding.md).
 
 #### Outros
