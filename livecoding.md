@@ -1,4 +1,4 @@
-# Enunciado do Projeto 2 (ano letivo 2021/22)
+# Enunciado exemplo do Projeto 2
 
 _**Atenção**: Este enunciado não é para implementar no Projeto 1! É apenas um
 exemplo do tipo de perguntas que poderão surgir no Projeto 2 (_live coding_)._
@@ -21,10 +21,11 @@ exemplo do tipo de perguntas que poderão surgir no Projeto 2 (_live coding_)._
     5.  Fazer *push* do estado atual do *clone* local para o novo
         repositório no GitHub.
 
-2.  Adiciona no início (topo) do *README.md* a seguinte informação na
+2.  Adiciona no início (topo) do `README.md` a seguinte informação na
     forma de *lista Markdown*:
 
-    1.  *Código *no topo deste enunciado.
+    1.  *Código* no topo deste enunciado (código só será fornecido no enunciado
+        real).
     2.  O teu *nome* e *número de aluno*.
 
 3.  Convidar o docente para colaborar no novo repositório.
@@ -35,30 +36,30 @@ exemplo do tipo de perguntas que poderão surgir no Projeto 2 (_live coding_)._
     seguinte informação, **usando obrigatoriamente Linq**:
 
     1.  **Painel 1**: o *número de tiles* que não têm qualquer recurso.
-    2.  **Painel 2**: qual o *valor médio* de *Gold* em tiles do tipo
+    2.  **Painel 2**: qual o *valor médio* de *Coin* em tiles do tipo
         *mountain*.
     3.  **Painel 3**: uma *lista* dos diferentes tipos de *terreno*
         existentes no mapa, ordenada por ordem alfabética.
     4.  **Painel 4**: qual o tipo de *terreno*, *recursos* e
-        *coordenadas* do *tile* com menor *Gold* no mapa atual.
+        *coordenadas* do *tile* com menor *Coin* no mapa atual.
     5.  **Painel 5**: o *número de tiles* completamente distintos que
         existem no mapa, ou seja, que sejam únicos relativamente ao seu
         tipo de terreno e recursos. Por exemplo:
           - Um *tile* com *mountain* e *fossilfuel* + *animals* é
             *diferente* de um *tile* com *mountain* e *animals*.
-          - Um *tile* com *grassland* + *metals* é *diferente* de um
+          - Um *tile* com *plains* + *metals* é *diferente* de um
             *tile* com *hills* + *metals*.
           - Um *tile* com *desert* + *plants* é *igual* a outro *tile*
             com *desert* + *plants*.
-          - Um *tile* com *ocean* é *igual* a outro *tile* com *ocean*.
+          - Um *tile* com *water* é *igual* a outro *tile* com *water*.
 
 ## Notas adicionais
 
-- Este projeto é com consulta. Podem utilizar livros ou qualquer
-  recurso na Internet. Não podem comunicar com ninguém, e a quebra
+- Este projeto é com consulta. Podes utilizar livros ou qualquer
+  recurso na Internet. Não podes comunicar com ninguém, e a quebra
   desta regra equivale automaticamente a nota zero neste projeto.
 - Este projeto tem um peso de 3 valores na nota final.
-- A realização com sucesso das alíenas 1 a 3 deste enunciado vale 0.5
+- A realização com sucesso das alíneas 1 a 3 deste enunciado vale 0.5
   valores.
 - A alínea 4 vale 2.5 valores, e cada uma dos respetivas sub-alíneas
   vale por sua vez 0.5 valores.
