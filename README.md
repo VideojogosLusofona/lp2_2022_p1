@@ -384,7 +384,7 @@ Estruturas de Dados][aed] do [Instituto Superior Técnico][ist]*
 [CC BY-NC-SA 4.0]:https://creativecommons.org/licenses/by-nc-sa/4.0/
 [MIT]:http://opensource.org/licenses/MIT
 [lamv]:https://www.ulusofona.pt/licenciatura/videojogos
-[Nuno Fachada]:https://github.com/fakenmc
+[Nuno Fachada]:https://github.com/nunofachada
 [ULHT]:https://www.ulusofona.pt/
 [aed]:https://fenix.tecnico.ulisboa.pt/disciplinas/AED-2/2009-2010/2-semestre/honestidade-academica
 [ist]:https://tecnico.ulisboa.pt/pt/
