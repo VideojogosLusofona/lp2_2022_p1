@@ -21,16 +21,17 @@ namespace Generator
             Generator generator;
             Map map;
 
-            if (args.Length != 3
-                || !int.TryParse(args[0], out rows)
-                || !int.TryParse(args[1], out cols)
+            if (args.Length != 4
+                || !(args[0] == "random" || args[0] == "pcg")
+                || !int.TryParse(args[1], out rows)
+                || !int.TryParse(args[2], out cols)
                 || rows < 1
                 || cols < 1)
             {
                 Console.Error.WriteLine(
-                    "Usage:\n\tdotnet run --project Generator -- <rows> <cols> <file>");
+                    "Usage:\n\tdotnet run --project Generator -- <random|pcg> <rows> <cols> <file>");
                 Console.Error.WriteLine(
-                    "Example:\n\tdotnet run --project Generator -- 80 50 myworld.map4x");
+                    "Example:\n\tdotnet run --project Generator -- pcg 80 50 myworld.map4x pcg");
                 return -1;
             }
 
@@ -46,11 +47,14 @@ namespace Generator
             }
 
             generator = new Generator(terrains, resources);
-            map = generator.CreateMap(rows, cols);
+
+            map = args[0] == "pcg"
+                ? generator.CreatePCGMap(rows, cols)
+                : generator.CreateRandomMap(rows, cols);
 
             try
             {
-                generator.SaveMap(map, args[2]);
+                generator.SaveMap(map, args[3]);
             }
             catch (Exception e)
             {

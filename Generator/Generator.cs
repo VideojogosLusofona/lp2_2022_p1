@@ -13,10 +13,12 @@ namespace Generator
         private const int maxBitsForTerrain = 4; // i.e. max of 16 terrain types
         private const int bitsInByte = 8;
         private const double probResource = 0.3;
+        private const double centerPointsDensity = 0.1;
         private readonly int terrainMask;
         private readonly Random random;
         private readonly IDictionary<int, string> terrains;
         private readonly IDictionary<int, string> resources;
+        private readonly IList<int> resourceList;
 
         public Generator(IEnumerable<string> terrainCollection,
             IEnumerable<string> resourceCollection)
@@ -43,30 +45,115 @@ namespace Generator
                 resources.Add(1 << resourceBit, resource);
                 resourceBit++;
             }
+
+            resourceList = new List<int>(resources.Keys);
         }
 
-        public Map CreateMap(int rows, int cols)
+        private void AddRandomResources(ref int tile)
+        {
+            int resourcesInTile = 0;
+            resourceList.Shuffle();
+
+            while (random.NextDouble() < probResource
+                && resourcesInTile < resources.Count)
+            {
+                tile |= resourceList[resourcesInTile];
+                resourcesInTile++;
+            }
+        }
+
+        public Map CreateRandomMap(int rows, int cols)
         {
             Map map = new Map(rows, cols);
-            IList<int> resourceList = new List<int>(resources.Keys);
 
             for (int r = 0; r < rows; r++)
             {
                 for (int c = 0; c < cols; c++)
                 {
-                    int resourcesInTile = 0;
                     int tile = random.Next(terrains.Count);
-                    resourceList.Shuffle();
 
-                    while (random.NextDouble() < probResource
-                        && resourcesInTile < resources.Count)
-                    {
-                        tile |= resourceList[resourcesInTile];
-                        resourcesInTile++;
-                    }
+                    AddRandomResources(ref tile);
 
                     map[r, c] = tile;
                 }
+            }
+
+            return map;
+        }
+
+        public Map CreatePCGMap(int rows, int cols)
+        {
+            double Distance((int r, int c) a, (int r, int c) b)
+            {
+                int dr = Math.Abs(a.r - b.r);
+                int dc = Math.Abs(a.c - b.c);
+
+                if (dr > rows / 2.0)
+                    dr = rows - dr;
+                if (dc > cols / 2.0)
+                    dc = cols - dc;
+
+                return Math.Sqrt(dr * dr + dc * dc);
+            }
+
+            Map map = new Map(rows, cols);
+
+            int numCenterPoints = (int)(rows * cols * centerPointsDensity);
+
+            IList<(int, int)> centerPoints;
+
+            ISet<(int, int)> unvisitedTiles = new HashSet<(int, int)>();
+
+            IDictionary<(int, int), int> visitedTiles =
+                new Dictionary<(int, int), int>();
+
+            for (int i = 0; i < rows; i++)
+                for (int j = 0; j < cols; j++)
+                    unvisitedTiles.Add((i, j));
+
+            while (visitedTiles.Count < numCenterPoints)
+            {
+                (int, int) tilePos = (random.Next(rows), random.Next(cols));
+                if (unvisitedTiles.Contains(tilePos))
+                {
+                    unvisitedTiles.Remove(tilePos);
+                    visitedTiles.Add(tilePos, random.Next(terrains.Count));
+                }
+            }
+
+            centerPoints = new List<(int, int)>(visitedTiles.Keys);
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    if (unvisitedTiles.Contains((i, j)))
+                    {
+                        double minDist = double.PositiveInfinity;
+                        int closestCenterTile = int.MaxValue;
+
+                        foreach ((int r, int c) point in centerPoints)
+                        {
+                            double dist = Distance((i, j), point);
+
+                            if (dist < minDist)
+                            {
+                                minDist = dist;
+                                closestCenterTile = visitedTiles[point];
+                            }
+                        }
+
+                        unvisitedTiles.Remove((i, j));
+                        visitedTiles.Add((i, j), closestCenterTile);
+                    }
+                }
+            }
+
+            foreach (KeyValuePair<(int r, int c), int> posTile in visitedTiles)
+            {
+                int tile = posTile.Value;
+                AddRandomResources(ref tile);
+                map[posTile.Key.r, posTile.Key.c] = tile;
             }
 
             return map;

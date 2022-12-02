@@ -198,15 +198,21 @@ mountain plants
 # Tudo o que aparecer a seguir de # deve ser ignorado
 ```
 
-Este enunciado inclui um gerador de mapas totalmente aleatórios para testarem o
-vosso projeto. O gerador é executado da seguinte forma na pasta do enunciado
-(não funciona se estiverem noutra pasta que não a do enunciado):
+Este enunciado inclui um gerador de mapas para testarem o vosso projeto. O
+gerador é executado da seguinte forma na pasta do enunciado (não funciona se
+estiverem noutra pasta que não a do enunciado):
 
 ```text
-$ dotnet run --project Generator -- 10 10 mymap.map4x
+$ dotnet run --project Generator -- pcg 10 10 mymap.map4x
 ```
 
-O comando anterior cria um mapa 10x10 e guarda-o no ficheiro `mymap.map4x`.
+O comando anterior cria um mapa 10x10 com geração procedimental e guarda-o no
+ficheiro `mymap.map4x`. O gerador também pode gerar mapas totalmente aleatórios
+alterando `pcg` para `random`, ou seja:
+
+```text
+$ dotnet run --project Generator -- random 10 10 mymap.map4x
+```
 
 Atenção que é necessário terem instalado o [.NET SDK 6.0] para executar este
 comando.
