@@ -214,8 +214,16 @@ alterando `pcg` para `random`, ou seja:
 $ dotnet run --project Generator -- random 10 10 mymap.map4x
 ```
 
-Atenção que é necessário terem instalado o [.NET SDK 6.0] para executar este
-comando.
+É também disponibilizado um visualizador de mapas para a linha de comandos
+(apenas capaz de mostrar terrenos, não recursos), que pode ser executado da
+seguinte forma:
+
+```text
+$ dotnet run --project Viewer -- mymap.map4x
+```
+
+Atenção que é necessário terem instalado o [.NET SDK 6.0] para executarem estes
+projetos.
 
 ## Dicas e sugestões
 
