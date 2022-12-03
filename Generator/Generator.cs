@@ -98,14 +98,17 @@ namespace Generator
 
             Map map = new Map(rows, cols);
 
-            int numCenterPoints = (int)(rows * cols * centerPointsDensity);
-
             IList<(int, int)> centerPoints;
 
             ISet<(int, int)> unvisitedTiles = new HashSet<(int, int)>();
 
             IDictionary<(int, int), int> visitedTiles =
                 new Dictionary<(int, int), int>();
+
+            int numCenterPoints = (int)(rows * cols * centerPointsDensity);
+
+            if (numCenterPoints < 4)
+                numCenterPoints = Math.Max(1, rows * cols / 3);
 
             for (int i = 0; i < rows; i++)
                 for (int j = 0; j < cols; j++)
